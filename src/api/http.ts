@@ -16,6 +16,15 @@ export const createClient = (config?: AxiosRequestConfig) => {
     ...config,
   });
 
+  axiosIntance.interceptors.request.use(
+    (config) => {
+      config.headers.Authorization = getToken() ? getToken() : "";
+      return config;
+    },
+    (error) => {
+      return Promise.reject(error);
+    }
+  );
   axiosIntance.interceptors.response.use(
     (response) => {
       return response;
