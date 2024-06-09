@@ -3,9 +3,9 @@ import { render, screen } from "@testing-library/react";
 
 import BookItem from "./BookItem";
 import { BookStoreThemeProvider } from "../../context/themeContext";
-import { Book } from "../../models/book.model";
+import { BookDetail } from "../../models/book.model";
 
-const dummy_book: Book = {
+const dummy_book: BookDetail = {
   id: 1,
   title: "Dummy title",
   image: 1,
@@ -20,13 +20,15 @@ const dummy_book: Book = {
   likes: 3,
   pubDate: "2021-01-01",
   categoryId: 1,
+  categoryName: "동화",
+  isLiked: true,
 };
 
 describe("bookItem 테스트", () => {
   it("렌더를 확인", () => {
     render(
       <BookStoreThemeProvider>
-        <BookItem book={dummy_book} />
+        <BookItem book={dummy_book} view="grid" />
       </BookStoreThemeProvider>
     );
 

@@ -3,4 +3,5 @@ export const QUERYSTRING = {
   NEWS: "news",
   PAGE: "page",
   PERPAGE: "perPage",
+  VIEW: "view",
 };
