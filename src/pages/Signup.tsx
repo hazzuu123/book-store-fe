@@ -14,7 +14,7 @@ interface SignupProps {
 
 const Signup = () => {
   const navigate = useNavigate();
-  const showAlert = useAlert();
+  const { showAlert } = useAlert();
   const {
     register,
     handleSubmit,

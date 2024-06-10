@@ -1,11 +1,15 @@
 import styled from "styled-components";
 import Title from "../components/common/Title";
 import BooksFilter from "../components/books/BooksFilter";
-import BooksEmpty from "../components/books/BooksEmpty";
+import Empty from "../components/common/Empty";
 import Pagination from "../components/books/Pagination";
 import BooksViewSwitcher from "../components/books/BooksViewSwitcher";
 import BookList from "../components/books/BookList";
 import { useBooks } from "../hooks/useBooks";
+import { FaSmileWink } from "react-icons/fa";
+import { Link } from "react-router-dom";
+
+import BooksEmpty from "../components/books/BooksEmpty";
 const Books = () => {
   const { books, pagination, isEmpty } = useBooks();
 

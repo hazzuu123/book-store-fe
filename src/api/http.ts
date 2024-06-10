@@ -30,6 +30,11 @@ export const createClient = (config?: AxiosRequestConfig) => {
       return response;
     },
     (error) => {
+      // 네트워크 에러
+      if (!error.response) {
+        alert("Network Error: Please check your internet connection.");
+        return Promise.reject(new Error("Network Error"));
+      }
       if (error.response.status === 401) {
         removeToken();
         window.location.href = "/login";

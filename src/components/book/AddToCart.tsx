@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { addCart } from "../../api/carts.api";
 import { BookDetail } from "../../models/book.model";
 import Button from "../common/Button";
 import InputText from "../common/InputText";

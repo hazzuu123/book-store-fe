@@ -8,7 +8,7 @@ import { addCart } from "../api/carts.api";
 export const useBookDetail = (bookId: string | undefined) => {
   const [book, setBook] = useState<BookDetail | null>(null);
   const { isLoggedIn } = useAuthStore();
-  const showAlert = useAlert();
+  const { showAlert } = useAlert();
 
   const [cartAdded, setCartAdded] = useState<boolean>(false);
 
