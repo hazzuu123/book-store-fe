@@ -1,23 +1,28 @@
-import { OrderSheet, OrderItemDetail, Order } from "../models/order.model";
-import { httpClient } from "./http";
+import { Order, OrderItemDetail, OrderSheet } from "../models/order.model";
+import { requestHandler } from "./http";
+
+// // 기존
+// export const order = async (orderData: OrderSheet) => {
+//   const response = await httpClient.post("/orders", orderData);
+//   return response.data;
+// };
 
 export const order = async (orderData: OrderSheet) => {
-  const response = await httpClient.post("/orders", orderData);
-  return response.data;
+  return await requestHandler<OrderSheet, any>("post", "/orders", orderData);
 };
 
 export const fetchOrders = async () => {
   try {
-    const response = await httpClient.get<Order[]>("/orders");
-    return response.data;
+    return await requestHandler<unknown, Order[]>("get", "/orders");
   } catch (err: any) {
     return [];
   }
 };
 
 export const fetchOrder = async (orderId: number) => {
-  const response = await httpClient.get<OrderItemDetail[]>(
+  // return response.data;
+  return await requestHandler<unknown, OrderItemDetail[]>(
+    "get",
     `/orders/${orderId}`
   );
-  return response.data;
 };
