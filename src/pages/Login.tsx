@@ -34,7 +34,6 @@ const Login = () => {
       })
       .catch((e) => {
         // todo: 에러 처리
-        console.log(1);
         showAlert("로그인 실패했습니다.");
       });
   };
