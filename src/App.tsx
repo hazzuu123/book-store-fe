@@ -13,82 +13,55 @@ import Cart from "./pages/Cart";
 import Order from "./pages/Order";
 import OrderList from "./pages/OrderList";
 
-const router = createBrowserRouter([
+const routeList = [
   {
     path: "/",
-    element: (
-      <Layout>
-        <Home />
-      </Layout>
-    ),
-    errorElement: <Error />,
+    element: <Home />,
   },
 
   {
     path: "/signup",
-    element: (
-      <Layout>
-        <Signup />
-      </Layout>
-    ),
+    element: <Signup />,
   },
   {
     path: "/login",
-    element: (
-      <Layout>
-        <Login />
-      </Layout>
-    ),
+    element: <Login />,
   },
   {
     path: "/reset",
-    element: (
-      <Layout>
-        <ResetPassword />
-      </Layout>
-    ),
+    element: <ResetPassword />,
   },
   {
     path: "/books",
-    element: (
-      <Layout>
-        <Books />
-      </Layout>
-    ),
+    element: <Books />,
   },
   {
     path: "/books/:bookId",
-    element: (
-      <Layout>
-        <BookDetail />
-      </Layout>
-    ),
+    element: <BookDetail />,
   },
   {
     path: "/cart",
-    element: (
-      <Layout>
-        <Cart />
-      </Layout>
-    ),
+    element: <Cart />,
   },
   {
     path: "/order",
-    element: (
-      <Layout>
-        <Order />
-      </Layout>
-    ),
+    element: <Order />,
   },
   {
     path: "/orderlist",
-    element: (
-      <Layout>
-        <OrderList />
-      </Layout>
-    ),
+    element: <OrderList />,
   },
-]);
+];
+
+const router = createBrowserRouter(
+  routeList.map((route) => {
+    return {
+      ...route,
+      element: <Layout>{route.element}</Layout>,
+      errorElement: <Error />,
+    };
+  })
+);
 
 function App() {
   return (
