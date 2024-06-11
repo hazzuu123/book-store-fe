@@ -1,20 +1,18 @@
-import styled from "styled-components";
-import Title from "../components/common/Title";
-import InputText from "../components/common/InputText";
-import Button from "../components/common/Button";
-import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { login } from "../api/auth.api";
-import { useAlert } from "../hooks/useAlert";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import Button from "../components/common/Button";
+import InputText from "../components/common/InputText";
+import Title from "../components/common/Title";
 
-interface SignupProps {
+export interface SignupProps {
   email: string;
   password: string;
 }
 
 const Signup = () => {
-  const navigate = useNavigate();
-  const { showAlert } = useAlert();
+  const { userSignup } = useAuth();
   const {
     register,
     handleSubmit,
@@ -22,15 +20,7 @@ const Signup = () => {
   } = useForm<SignupProps>();
 
   const onSubmit: SubmitHandler<SignupProps> = (data) => {
-    console.log(data);
-    login(data)
-      .then((res) => {
-        showAlert("성공");
-        navigate("/login");
-      })
-      .catch((e) => {
-        // todo: 에러 처리
-      });
+    userSignup(data);
   };
 
   return (
