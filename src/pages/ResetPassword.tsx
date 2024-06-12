@@ -1,13 +1,10 @@
-import Title from "../components/common/Title";
-import InputText from "../components/common/InputText";
-import Button from "../components/common/Button";
-import { Link, useNavigate } from "react-router-dom";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { resetPassword, resetRequest } from "../api/auth.api";
-import { useAlert } from "../hooks/useAlert";
-import { SignupStyle } from "./Signup";
-import { useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
+import Button from "../components/common/Button";
+import InputText from "../components/common/InputText";
+import Title from "../components/common/Title";
+import { SignupStyle } from "./Signup";
 
 interface SignupProps {
   email: string;
@@ -15,8 +12,6 @@ interface SignupProps {
 }
 
 const ResetPassword = () => {
-  const navigate = useNavigate();
-  const { showAlert } = useAlert();
   const { userResetPassowrd, userResetRequest, resetRequested } = useAuth();
 
   const {

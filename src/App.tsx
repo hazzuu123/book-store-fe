@@ -2,16 +2,18 @@ import Layout from "./components/layout/Layout";
 import { BookStoreThemeProvider } from "./context/themeContext";
 import Home from "./pages/Home";
 
+import { QueryClientProvider } from "react-query";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { queryClient } from "./api/queryClient";
 import Error from "./components/common/Error";
-import Signup from "./pages/Signup";
-import ResetPassword from "./pages/ResetPassword";
-import Login from "./pages/Login";
-import Books from "./pages/Books";
 import BookDetail from "./pages/BookDetail";
+import Books from "./pages/Books";
 import Cart from "./pages/Cart";
+import Login from "./pages/Login";
 import Order from "./pages/Order";
 import OrderList from "./pages/OrderList";
+import ResetPassword from "./pages/ResetPassword";
+import Signup from "./pages/Signup";
 
 const routeList = [
   {
@@ -65,9 +67,11 @@ const router = createBrowserRouter(
 
 function App() {
   return (
-    <BookStoreThemeProvider>
-      <RouterProvider router={router} />
-    </BookStoreThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <BookStoreThemeProvider>
+        <RouterProvider router={router} />
+      </BookStoreThemeProvider>
+    </QueryClientProvider>
   );
 }
 

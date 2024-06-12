@@ -8,7 +8,7 @@ import { useBooks } from "../hooks/useBooks";
 
 import BooksEmpty from "../components/books/BooksEmpty";
 const Books = () => {
-  const { books, pagination, isEmpty } = useBooks();
+  const { books, pagination, isEmpty, isBooksLoading } = useBooks();
 
   return (
     <>
@@ -19,8 +19,8 @@ const Books = () => {
           <BooksViewSwitcher />
         </div>
         {isEmpty && <BooksEmpty />}
-        {!isEmpty && <BookList books={books} />}
-        {!isEmpty && <Pagination pagination={pagination} />}
+        {!isEmpty && books && <BookList books={books} />}
+        {!isEmpty && pagination && <Pagination pagination={pagination} />}
         {/* 페이지네이션 */}
       </BooksStyle>
     </>
