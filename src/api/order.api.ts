@@ -8,12 +8,12 @@ import { requestHandler } from "./http";
 // };
 
 export const order = async (orderData: OrderSheet) => {
-  return await requestHandler<OrderSheet, any>("post", "/orders", orderData);
+  return await requestHandler<any, OrderSheet>("post", "/orders", orderData);
 };
 
 export const fetchOrders = async () => {
   try {
-    return await requestHandler<unknown, Order[]>("get", "/orders");
+    return await requestHandler<Order[]>("get", "/orders");
   } catch (err: any) {
     return [];
   }
@@ -21,8 +21,5 @@ export const fetchOrders = async () => {
 
 export const fetchOrder = async (orderId: number) => {
   // return response.data;
-  return await requestHandler<unknown, OrderItemDetail[]>(
-    "get",
-    `/orders/${orderId}`
-  );
+  return await requestHandler<OrderItemDetail[]>("get", `/orders/${orderId}`);
 };

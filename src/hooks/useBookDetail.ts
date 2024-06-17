@@ -1,14 +1,20 @@
 import { useEffect, useState } from "react";
-import { BookDetail } from "../models/book.model";
+import {
+  BookDetail,
+  BookReviewItem,
+  BookReviewItemWrite,
+} from "../models/book.model";
 import { fetchBook, likeBook, unLike } from "../api/books.api";
 import { useAuthStore } from "../store/authStore";
 import { useAlert } from "./useAlert";
 import { addCart } from "../api/carts.api";
+import { addBookReview, fetchBookReview } from "@/api/review.api";
 
 export const useBookDetail = (bookId: string | undefined) => {
   const [book, setBook] = useState<BookDetail | null>(null);
   const { isLoggedIn } = useAuthStore();
   const { showAlert } = useAlert();
+  const [reviews, setReviews] = useState<BookReviewItem[]>([]);
 
   const [cartAdded, setCartAdded] = useState<boolean>(false);
 
@@ -53,6 +59,20 @@ export const useBookDetail = (bookId: string | undefined) => {
     fetchBook(bookId).then((book) => {
       setBook(book);
     });
+
+    fetchBookReview(bookId).then((reviews) => {
+      setReviews(reviews);
+    });
   }, [bookId]);
-  return { book, likeToggle, addToCart, cartAdded };
+
+  const addReview = (data: BookReviewItemWrite) => {
+    if (!book) return;
+
+    addBookReview(book.id.toString(), data).then((res) => {
+      fetchBookReview(book.id.toString()).then((reviews) => {
+        setReviews(reviews);
+      });
+    });
+  };
+  return { book, likeToggle, addToCart, cartAdded, reviews, addReview };
 };

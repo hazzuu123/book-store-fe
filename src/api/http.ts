@@ -54,7 +54,7 @@ export const httpClient = createClient();
 // 공통 요청 부분
 type requestMethod = "get" | "post" | "put" | "delete";
 
-export const requestHandler = async <T, U>(
+export const requestHandler = async <U = undefined, T = undefined>(
   method: requestMethod,
   url: string,
   payload?: T
@@ -63,16 +63,16 @@ export const requestHandler = async <T, U>(
 
   switch (method) {
     case "post":
-      response = await httpClient.post(url, payload);
+      response = await httpClient.post<U>(url, payload);
       break;
     case "get":
-      response = await httpClient.get(url);
+      response = await httpClient.get<U>(url);
       break;
     case "put":
-      response = await httpClient.put(url, payload);
+      response = await httpClient.put<U>(url, payload);
       break;
     case "delete":
-      response = await httpClient.delete(url);
+      response = await httpClient.delete<U>(url);
       break;
   }
 
