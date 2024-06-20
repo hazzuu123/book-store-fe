@@ -10,6 +10,9 @@ import EllipsisBox from "../components/common/EllipsisBox";
 import LikeButton from "../components/book/LikeButton";
 import AddToCart from "../components/book/AddToCart";
 import BookReview from "@/components/book/BookReview";
+import Modal from "@/components/common/Modal";
+import { useState } from "react";
+import { Tab, Tabs } from "@/components/common/Taps";
 
 const bookInfoList = [
   {
@@ -52,13 +55,19 @@ const BookDetail = () => {
   const { bookId } = useParams();
 
   const { book, likeToggle, reviews, addReview } = useBookDetail(bookId);
-
+  const [isImgOpen, setIsImgOpen] = useState<boolean>(false);
   if (!book) return null;
 
   return (
     <BookDetailStyle>
       <header className="header">
-        <img src={getImageSrc(book.image)} alt={book.title} />
+        <div onClick={() => setIsImgOpen(true)}>
+          <img src={getImageSrc(book.image)} alt={book.title} />
+        </div>
+
+        <Modal isOpen={isImgOpen} onClose={() => setIsImgOpen(false)}>
+          <img src={getImageSrc(book.image)} alt={book.title} />
+        </Modal>
         <div className="info">
           <Title size="large" color="text">
             {book.title}
@@ -83,14 +92,20 @@ const BookDetail = () => {
         </div>
       </header>
       <div className="content">
-        <Title size="medium">상세설명</Title>
-
-        <EllipsisBox lineLimit={4}>{book.detail}</EllipsisBox>
-
-        <Title size="medium">목차</Title>
-        <p className="index">{book.contents}</p>
-        <Title size="medium">리뷰</Title>
-        <BookReview reviews={reviews} onAdd={addReview} />
+        <Tabs>
+          <Tab title="상세 설명">
+            <Title size="medium">상세설명</Title>
+            <EllipsisBox lineLimit={4}>{book.detail}</EllipsisBox>
+          </Tab>
+          <Tab title="목차">
+            <Title size="medium">목차</Title>
+            <p className="index">{book.contents}</p>
+          </Tab>
+          <Tab title="리뷰">
+            <Title size="medium">리뷰</Title>
+            <BookReview reviews={reviews} onAdd={addReview} />
+          </Tab>
+        </Tabs>
       </div>
     </BookDetailStyle>
   );
